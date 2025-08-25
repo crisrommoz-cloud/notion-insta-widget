@@ -4,7 +4,7 @@ export default function Gallery() {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch("/api/notion-feed?db=25a92299d51b80399ba1cf442c77a21e")
+    fetch("/api/notion-feed")
       .then((res) => res.json())
       .then((data) => setImages(data));
   }, []);
@@ -16,11 +16,11 @@ export default function Gallery() {
       gap: "10px",
       padding: "20px"
     }}>
-      {images.map((item, i) => (
+      {images.map((item) => (
         <img
-          key={i}
+          key={item.id}
           src={item.image}
-          alt="Notion media"
+          alt={item.caption}
           style={{ width: "100%", borderRadius: "8px" }}
         />
       ))}

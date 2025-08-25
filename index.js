@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Notion Instagram Grid</title>
-    <link rel="stylesheet" href="widget.css" />
-  </head>
-  <body>
-    <div id="grid"></div>
-    <script src="widget.js"></script>
-  </body>
-</html>
+import Gallery from "./gallery";
+
+export default function Home() {
+  return (
+    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+      <h1>📸 My Notion Instagram Feed</h1>
+      <Gallery />
+    </div>
+  );
+}

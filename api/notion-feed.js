@@ -20,14 +20,24 @@ export default async function handler(req, res) {
     });
 
     const results = response.results.map((page) => {
-      return {
-        image: page.properties.URL?.url || "",
-      };
+      const files = page.properties.Media?.files || [];
+      let imageUrl = "";
+
+      if (files.length > 0) {
+        const file = files[0];
+        if (file.type === "external") {
+          imageUrl = file.external.url;
+        } else if (file.type === "file") {
+          imageUrl = file.file.url;
+        }
+      }
+
+      return { image: imageUrl };
     });
 
     res.status(200).json(results);
   } catch (e) {
-    console.error("Notion API error:", e); // This will show in Vercel logs
+    console.error("Notion API error:", e); // This will show up in Vercel logs
     res.status(500).json({ error: e.message });
   }
 }
